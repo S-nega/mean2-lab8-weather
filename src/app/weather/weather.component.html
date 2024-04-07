@@ -1,7 +1,20 @@
-<p>search block</p>
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input type="text" class="form-control" id="city" formControlName="city">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary" [disabled]="!searchForm.valid">Search</button>
+</form>
 <br>
 
-{{data.name}}
-{{data.weather}}
-{{data.description}}
-{{data.main}}
+
+<h1>{{data.name}}</h1>
+<h2>{{data.main.temp}}</h2>
+<p>
+    Feels like {{data.main.feels_like}}
+</p>
+
+{{data.weather[0].description}}
+ 

@@ -1,0 +1,21 @@
+
+# Определение второго сервиса для Express.js API
+FROM node:latest AS api
+
+# Устанавливаем рабочую директорию внутри контейнера для API
+WORKDIR /api
+
+# Копируем файлы package.json и package-lock.json для установки зависимостей API
+COPY package*.json ./
+
+# Устанавливаем зависимости API
+RUN npm install
+
+# Копируем все файлы проекта API в рабочую директорию контейнера
+COPY . .
+
+# Определяем порт, который будет прослушивать контейнер Express.js
+EXPOSE 3000
+
+# Команда для запуска Express.js приложения
+CMD ["node", "server.js"]
