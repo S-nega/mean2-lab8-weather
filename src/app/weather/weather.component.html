@@ -1,20 +1,30 @@
 
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+<div class="container" style="margin: 20px 10% 0 10%; width: 80%; justify-content: center;"><br>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="city">City:</label>
-      <input type="text" class="form-control" id="city" formControlName="city">
+      <label for="city">Search city:</label>
+      <input type="text" class="form-control" id="city" formControlName="city" placeholder="Almaty" style="width: 90%;">
     </div>
     <br>
     <button type="submit" class="btn btn-primary" [disabled]="!searchForm.valid">Search</button>
-</form>
-<br>
+  </form>
+  <br>
+  <!-- <p>Город: {{ weatherData }}</p> -->
+  <!-- <p>Температура: {{ data.main.temp }} °C</p> -->
+  <!-- <p>Описание: {{ data.weather[0].description }}</p> -->
 
-
-<h1>{{data.name}}</h1>
-<h2>{{data.main.temp}}</h2>
-<p>
-    Feels like {{data.main.feels_like}}
-</p>
-
-{{data.weather[0].description}}
- 
+  <div class="info" style="display: flex;">
+    <div style="display: block; width: 300px;">
+      <h2>{{weatherData.name}}</h2>
+      <h3>{{weatherData.main.temp}} °C</h3>  
+    </div>
+    <div style="display: block; width: 300px;">
+      <p style="margin-top: 19px; margin-bottom: 0;">
+        {{weatherData.weather[0].description}}
+      </p>
+      <p style="margin-top: 19px; margin-bottom: 0;">
+        Feels like {{weatherData.main.feels_like}} °C
+      </p> 
+    </div>
+  </div>
+</div>

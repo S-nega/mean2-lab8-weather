@@ -10,9 +10,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/weather', async (req, res) => {
-  res.redirect('/api/weather/' + 'almaty');
-})
+// router.get('/weather', async (req, res) => {
+//   // res.redirect('/api/weather/' + 'almaty');
+// })
 
 router.post('/search', (req, res) => {
 
@@ -27,7 +27,9 @@ router.post('/search', (req, res) => {
 })
 
 router.get('/weather/:city', async (req, res) => {
+    console.log("router get weather/city")
     const {city} = req.params;
+    console.log("city = " + city);
     // const city = req.query.city;
     if (!city) {
         return res.status(400).json({ error: 'City parameter is required' });
@@ -35,8 +37,9 @@ router.get('/weather/:city', async (req, res) => {
   
     try {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
-        const weatherData = response.data;
-        res.status(200).json(weatherData);
+        const data = response.data;
+        console.log(data)
+        res.status(200).json(data);
     } catch (error) {
         console.error('Error fetching weather data:', error);
         res.status(500).json({ error: 'Failed to fetch weather data' });

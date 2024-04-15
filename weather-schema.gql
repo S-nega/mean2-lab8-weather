@@ -1,0 +1,9 @@
+type Query {
+  getWeatherByCityName(cityName: String!): Weather
+}
+
+type Weather {
+  cityName: String!
+  temperature: Float!
+  description: String!
+}

@@ -1,32 +1,13 @@
 # Используем официальный образ Node.js в качестве базового образа для сборки Angular приложения
 FROM node:latest AS build
 
-# Устанавливаем рабочую директорию внутри контейнера для фронтенда
-WORKDIR /app
+WORKDIR /usr/local/app
 
-# Копируем файлы package.json и package-lock.json для установки зависимостей фронтенда
-COPY package*.json ./
-
-# Устанавливаем зависимости фронтенда
 RUN npm install
 
-# Копируем все файлы проекта фронтенда в рабочую директорию контейнера
-COPY . .
+RUN npm run build
 
-# Собираем Angular приложение
-RUN npm run build --prod
-
-# Второй этап для уменьшения размера образа
 FROM nginx:latest
 
-# Копируем скомпилированные файлы Angular из предыдущего этапа в образ NGINX
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Копируем конфигурацию NGINX
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Определяем порт, который будет прослушивать контейнер NGINX
+COPY --from=build /usr/local/app/dist/lab8-weather /usr/share/nginx/html
 EXPOSE 80
-
-# Команда для запуска NGINX внутри контейнера
-CMD ["nginx", "-g", "daemon off;"]

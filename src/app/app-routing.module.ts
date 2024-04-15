@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'weather', pathMatch: 'full' },
   { path: 'weather/:city', component: WeatherComponent },
   { path: 'weather', component: WeatherComponent },
+  { path: 'error', component: WeatherComponent },
 ];
 
 @NgModule({
