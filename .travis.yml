@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 14
+
+services:
+  - mongodb
+
+before_script:
+  - npm install
+  - npm install -g protractor
+  - webdriver-manager update
+
+script:
+  - npm test
+  - npm run e2e

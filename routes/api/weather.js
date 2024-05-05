@@ -1,7 +1,6 @@
 var express = require('express');
 const axios = require('axios');
 var router = express.Router();
-// const fetch = require('node-fetch');
 
 const API_KEY = 'a3a57c49760152eb5e48acf5527cc76c&units=metric';
 
@@ -9,10 +8,6 @@ const API_KEY = 'a3a57c49760152eb5e48acf5527cc76c&units=metric';
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
-// router.get('/weather', async (req, res) => {
-//   // res.redirect('/api/weather/' + 'almaty');
-// })
 
 router.post('/search', (req, res) => {
 
@@ -30,7 +25,6 @@ router.get('/weather/:city', async (req, res) => {
     console.log("router get weather/city")
     const {city} = req.params;
     console.log("city = " + city);
-    // const city = req.query.city;
     if (!city) {
         return res.status(400).json({ error: 'City parameter is required' });
     }
